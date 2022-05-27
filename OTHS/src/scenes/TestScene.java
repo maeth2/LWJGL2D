@@ -11,6 +11,7 @@ import main.Camera;
 import main.GameObject;
 import main.Transform;
 import util.AssetLoader;
+import util.Loader;
 
 public class TestScene extends Scene{
 	
@@ -31,9 +32,11 @@ public class TestScene extends Scene{
 		 */
 		camera = new Camera(new Vector2f(), 32 * 40, 32 * 21);
 		
+		Loader.loadLevel("assets/levels/level.txt", this);
+		
 		p = new GameObject(
 				"OBJ", 
-				new Transform(new Vector2f(100, 100), new Vector2f(128, 128)),
+				new Transform(new Vector2f(0, 0), new Vector2f(128, 128)),
 				100
 		);
 		p.addComponent(new SpriteRenderer(AssetLoader.getSpriteSheet("assets/textures/test.png", 32, 32).getSprite(0)));
@@ -52,28 +55,28 @@ public class TestScene extends Scene{
 		states.setDefaultState("IDLE");
 		addGameObjectToScene(p);
 		
-		for(int i = 0; i < 10000; i++) {
-			GameObject go2 = new GameObject(
-					"OBJ2", 
-					new Transform(new Vector2f((float)Math.random() * 1000, (float)Math.random() * 1000), new Vector2f(50, 50)),
-					(int)Math.random() * 5
-			);
-			go2.addComponent(new SpriteRenderer(AssetLoader.getSpriteSheet("assets/textures/test.png", 32, 32).getSprite(0)));
-			go2.addComponent(new StateMachine());
-			states = go2.getComponent(StateMachine.class);
-			idle = new AnimationState("IDLE", true);
-			idle.addFrame(AssetLoader.getSpriteSheet("assets/textures/test.png", 32, 32).getSprite(0), 0.5f);
-			idle.addFrame(AssetLoader.getSpriteSheet("assets/textures/test.png", 32, 32).getSprite(1), 0.5f);
-			states.add(idle);
-			attacking = new AnimationState("RUNNING", true);
-			attacking.addFrame(AssetLoader.getSpriteSheet("assets/textures/test.png", 32, 32).getSprite(0), 0.5f);
-			attacking.addFrame(AssetLoader.getSpriteSheet("assets/textures/test.png", 32, 32).getSprite(2), 0.5f);
-			states.add(attacking);
-			states.addStateTrigger("IDLE", "RUNNING", "MOVE");
-			states.addStateTrigger("RUNNING", "IDLE", "STOP");
-			states.setDefaultState("IDLE");
-			addGameObjectToScene(go2);
-		}
+//		for(int i = 0; i < 10000; i++) {
+//			GameObject go2 = new GameObject(
+//					"OBJ2", 
+//					new Transform(new Vector2f((float)Math.random() * 1000, (float)Math.random() * 1000), new Vector2f(50, 50)),
+//					(int)Math.random() * 5
+//			);
+//			go2.addComponent(new SpriteRenderer(AssetLoader.getSpriteSheet("assets/textures/test.png", 32, 32).getSprite(0)));
+//			go2.addComponent(new StateMachine());
+//			states = go2.getComponent(StateMachine.class);
+//			idle = new AnimationState("IDLE", true);
+//			idle.addFrame(AssetLoader.getSpriteSheet("assets/textures/test.png", 32, 32).getSprite(0), 0.5f);
+//			idle.addFrame(AssetLoader.getSpriteSheet("assets/textures/test.png", 32, 32).getSprite(1), 0.5f);
+//			states.add(idle);
+//			attacking = new AnimationState("RUNNING", true);
+//			attacking.addFrame(AssetLoader.getSpriteSheet("assets/textures/test.png", 32, 32).getSprite(0), 0.5f);
+//			attacking.addFrame(AssetLoader.getSpriteSheet("assets/textures/test.png", 32, 32).getSprite(2), 0.5f);
+//			states.add(attacking);
+//			states.addStateTrigger("IDLE", "RUNNING", "MOVE");
+//			states.addStateTrigger("RUNNING", "IDLE", "STOP");
+//			states.setDefaultState("IDLE");
+//			addGameObjectToScene(go2);
+//		}
 		
 		camera.setTarget(p.transform);
 	}

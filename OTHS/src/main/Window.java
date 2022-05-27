@@ -75,6 +75,8 @@ public class Window {
 	}
 	
 	public void init() {
+		System.out.println("CREATING WINDOW...");
+
 		// Setting up error callback
 		GLFWErrorCallback.createPrint(System.err).set();
 		

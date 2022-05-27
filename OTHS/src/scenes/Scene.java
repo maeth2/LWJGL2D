@@ -5,6 +5,7 @@ import java.util.List;
 
 import main.Camera;
 import main.GameObject;
+import main.Tile;
 import renderer.Renderer;
 
 public abstract class Scene {	
@@ -13,7 +14,8 @@ public abstract class Scene {
 	protected Renderer renderer = new Renderer();
 	private boolean isRunning = false;
 	protected List<GameObject> gameObjects = new ArrayList<GameObject>();
-
+	protected List<Tile> tiles = new ArrayList<Tile>();
+	
 	public Scene() {}
 	
 	/**
@@ -28,11 +30,29 @@ public abstract class Scene {
 	 */
 	public abstract void update(float dt);
 	
+	/**
+	 * Adds a game object to the scene
+	 * 
+	 * @param g			Game object to add
+	 */
 	public void addGameObjectToScene(GameObject g) {
 		gameObjects.add(g);
 		if(isRunning) {
 			g.start();
 			renderer.add(g);
+		}
+	}
+	
+	/**
+	 * Adds a tile to the scene
+	 * 
+	 * @param t			Tile to add
+	 */
+	public void addTileToScene(Tile t) {
+		tiles.add(t);
+		if(isRunning) {
+			t.start();
+			renderer.add(t);
 		}
 	}
 	
@@ -54,5 +74,4 @@ public abstract class Scene {
 	public Camera getCamera() {
 		return this.camera;
 	}
-	
 }
