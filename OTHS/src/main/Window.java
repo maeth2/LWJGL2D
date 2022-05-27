@@ -19,7 +19,7 @@ import static org.lwjgl.opengl.GL11.*;
 public class Window {
 	private static Window instance;
 	private String name;
-	private int width, height;
+	public static int WIDTH, HEIGHT;
 	private long glfwWindow;
 	
 	public float r, g, b, c;
@@ -28,8 +28,8 @@ public class Window {
 	
 	public Window() {
 		this.name = "OTHS";
-		this.width = 1920;
-		this.height = 1000;
+		WIDTH = 1920;
+		HEIGHT = 1000;
 		r = 1;
 		g = 1;
 		b = 1;
@@ -91,7 +91,7 @@ public class Window {
 		glfwWindowHint(GLFW_MAXIMIZED, GLFW_TRUE);
 		
 		// Create the window
-		glfwWindow = glfwCreateWindow(this.width, this.height, this.name, 0, 0);
+		glfwWindow = glfwCreateWindow(WIDTH, HEIGHT, this.name, 0, 0);
 		
 		if(glfwWindow == 0) {
 			throw new IllegalStateException("Failed to initialize window");

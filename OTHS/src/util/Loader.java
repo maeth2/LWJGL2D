@@ -9,8 +9,8 @@ import main.Tile;
 import scenes.Scene;
 
 public class Loader {
-	private static final int WIDTH = 1;
-	private static final int HEIGHT = 1;
+	private static final int WIDTH = 50;
+	private static final int HEIGHT = 50;
 	
 	/**
 	 * Loads level txt file into game
